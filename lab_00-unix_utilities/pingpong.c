@@ -1,3 +1,17 @@
+/**
+ * @name	pingpong
+ *
+ * @brief	Write a user-level program that uses xv6 system calls to 
+ * 		''ping-pong'' a byte between two processes over a pair of pipes,
+ * 		one for each direction. The parent should send a byte to the
+ * 		child; the child should print "<pid>: received ping", where
+ * 		<pid> is its process ID, write the byte on the pipe to the
+ * 		parent, and exit; the parent should read the byte from the child,
+ * 		print "<pid>: received pong", and exit. Your solution should be
+ * 		in the file user/pingpong.c.
+ *
+ * @date	8-Aug-2025
+ **/
 #include "kernel/types.h"
 #include "kernel/stat.h"
 #include "user/user.h"
@@ -29,8 +43,9 @@ main(int argc, char *argv[])
 		// Print the <pid>: received ping
 		printf("%d: received ping\n", getpid());
 
-		// Write a byte
+		// Write a byte (we don't care what we're writing; so, anything will do)
 		write(pipefd[1], "x", 1);
+		// Don't forget to close the write file handle
 		close(pipefd[1]);
 
 		// exit
